@@ -1,5 +1,6 @@
 import React from 'react'
 import { ScrollView, StyleSheet } from 'react-native'
+import BestSeller from '../../components/BestSeller'
 import Category from '../../components/Category'
 import HeaderAppBar from '../../components/HeaderAppBar'
 import { COLORS } from '../../constants/theme'
@@ -9,6 +10,7 @@ export default function HomeScreen() {
         <ScrollView  style={styles.container} scrollEnabled >
             <HeaderAppBar showBackIcon={true}/>
             <Category/>
+            <BestSeller/>
         </ScrollView>
     )
 }
