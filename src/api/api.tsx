@@ -36,6 +36,11 @@ export const PRODUCT=[
     name: 'Mozzi cat',
     price: 390000,
     image: require("../../assets/images/product2.png")
-
+},
+{
+  id:"3",
+  name: 'Product 3',
+  price: 519000,
+  image: require("../../assets/images/product2.png")
 }
 ];

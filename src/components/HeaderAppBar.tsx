@@ -14,45 +14,65 @@ import { COLORS, SIZES } from "../constants/theme";
 import { RootStateOrAny, useSelector } from "react-redux";
 
 interface headerAppBar {
+  navigation?:any ,
   showBackIcon?: boolean;
   placeholder?: string | any;
+  showInput?: boolean,
+  showCart?: boolean,
 }
 
 export default function HeaderAppBar({
-  showBackIcon = true,
+  navigation,
+  showBackIcon = false,
   placeholder = "Tìm kiếm...",
+  showInput = true,
+  showCart = true,
 }: headerAppBar) {
   const [widthContainerSearch, setWidthContainerSearch] = useState("87%");
   const cart = useSelector(
     (state: RootStateOrAny) => state.productReducer.cart
   );
-  console.log(cart);
+  let product = cart.length;
+  var  totalItemCart = 0 ;
+  for(let i = 0 ; i<= product - 1; i++){
+    totalItemCart += cart[i].quantity;
+  }
+  
+
 
   return (
     <View style={styles.container}>
-      {showBackIcon ? null : (
-        <TouchableOpacity>
+      {showBackIcon == false? null : (
+        <TouchableOpacity
+          onPress={()=>{
+            navigation.goBack()
+          } }
+        >
           <BackIcon size={26} />
         </TouchableOpacity>
       )}
 
-      <View
+      {showInput  == true ? <View
         style={[
           styles.inputSearchContainer,
           {
-            width: showBackIcon ? widthContainerSearch : "75%",
+            width: showBackIcon  == false ? widthContainerSearch : "75%",
           },
         ]}
       >
         <SearchIcon size={24} />
         <TextInput style={styles.inputSearch} placeholder={placeholder} />
-      </View>
+      </View>: null }
 
-      <TouchableOpacity style={styles.cart}>
+     {showCart == true ?  <TouchableOpacity style={styles.cart}
+        onPress={()=>{
+          navigation.navigate("Cart")
+        }}
+      >
         <CartIcon size={26} />
         <View style={styles.itemCart}></View>
-        <Text style={[styles.textItemCard , {left: (cart.length < 10 )? 17.5: 13.5 }]}>{cart.length}</Text>
-      </TouchableOpacity>
+        <Text style={[styles.textItemCard , {left: (totalItemCart < 10 )? 17.5: 13.5 }]}>{totalItemCart}</Text>
+      </TouchableOpacity>: null }
     </View>
   );
 }

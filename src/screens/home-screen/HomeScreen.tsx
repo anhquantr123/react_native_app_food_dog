@@ -5,12 +5,12 @@ import Category from '../../components/Category'
 import HeaderAppBar from '../../components/HeaderAppBar'
 import { COLORS } from '../../constants/theme'
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}: any) {
     return (
         <ScrollView  style={styles.container} scrollEnabled >
-            <HeaderAppBar showBackIcon={true}/>
+            <HeaderAppBar showBackIcon={false} navigation={navigation}/>
             <Category/>
-            <BestSeller/>
+            <BestSeller />
         </ScrollView>
     )
 }

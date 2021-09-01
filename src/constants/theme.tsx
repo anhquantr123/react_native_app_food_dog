@@ -7,7 +7,8 @@ export const COLORS ={
     primaryColor : '#EF7C91',
     secondColor: '#FEE2EA',
     grayColor : '#A1A1A1',
-    backgroundColor : '#ffffff'
+    backgroundColor : '#ffffff',
+    blackColor: "#000000"
 
 }
 

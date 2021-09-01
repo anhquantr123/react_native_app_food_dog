@@ -20,12 +20,14 @@ interface category {
 
 const ItemCategory = ({ id, name, image, isSelected }: category) => {
   return (
-    <View style={styles.container_itemCategory}>
+    <View style={[styles.container_itemCategory, {backgroundColor: isSelected == id? COLORS.primaryColor: COLORS.backgroundColor}]}>
+      <View style={styles.backgroundImageItemCategory}>
       <Image source={image} style={[styles.imageItemCategory]} />
+      </View>
       <Text
         style={[
           styles.nameItemCategory,
-          { color: isSelected == id ? COLORS.primaryColor : COLORS.grayColor , 
+          { color: isSelected == id ? COLORS.backgroundColor : COLORS.grayColor , 
             fontSize: isSelected== id? SIZES.body3 : SIZES.body4,
             fontWeight: isSelected== id? "bold": "normal",
             },
@@ -72,8 +74,8 @@ const styles = StyleSheet.create({
   },
   container_itemCategory: {
     width: 110,
-    backgroundColor: COLORS.backgroundColor,
-    padding: 15,
+  
+    padding: 10,
     margin: 10,
     shadowColor: "#000",
     shadowOffset: {
@@ -82,10 +84,9 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
-
     elevation: 3,
     alignItems: "center",
-    borderRadius: 20,
+    borderRadius: 35,
   },
   imageItemCategory: {
     width: 50,
@@ -96,4 +97,11 @@ const styles = StyleSheet.create({
     margin: 5,
     color: COLORS.grayColor,
   },
+  backgroundImageItemCategory:{
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor:COLORS.backgroundColor,
+    borderRadius:45,
+    padding:10
+  }
 });
