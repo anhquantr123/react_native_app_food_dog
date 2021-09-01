@@ -10,13 +10,12 @@ import {
 import AddIcon from "../../assets/icons/add-icon";
 import { PRODUCT } from "../api/api";
 import { SIZES, COLORS } from "../constants/theme";
-import{useDispatch} from 'react-redux'
-import { addToCart } from "../redux/actions/action-product";
-
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { addToCart, deleteProduct } from "../redux/actions/action-cart";
 
 interface itemProduct {
   id: string | any;
-  name: string | any;
+  name: string;
   price: number;
   image: any;
 }
@@ -47,7 +46,49 @@ const ItemProduct = ({ id, name, image, price }: itemProduct) => {
     }
     prices = tem + "." + prices.replace("..", "");
   }
-  const dispatch  = useDispatch(); 
+  const dispatch = useDispatch();
+  const cartCurrent = useSelector(
+    (state: RootStateOrAny) => state.productReducer.cart
+  );
+  const onPressAddToCart = () => {
+    let totalItemCart = cartCurrent.length;
+    if (totalItemCart == 0) {
+      const newCart = {
+        id: id,
+        image: image,
+        price: price,
+        name: name,
+        quantity: 1,
+      };
+      dispatch(addToCart(newCart));
+    } else {
+      let productCurrent = cartCurrent.filter((item: any) => item.id == id);
+      if (productCurrent.length > 0) {
+        let quantity = productCurrent[0].quantity;
+        const deleteItem = {
+          id: id,
+        };
+        dispatch(deleteProduct(deleteItem));
+        const updateProduct = {
+          id: id,
+          image: image,
+          price: price,
+          name: name,
+          quantity: quantity + 1,
+        };
+        dispatch(addToCart(updateProduct));
+      } else {
+        const newCart = {
+          id: id,
+          image: image,
+          price: price,
+          name: name,
+          quantity: 1,
+        };
+        dispatch(addToCart(newCart));
+      }
+    }
+  };
 
   return (
     <View style={styles.containerItemProduct}>
@@ -79,9 +120,7 @@ const ItemProduct = ({ id, name, image, price }: itemProduct) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={{ width: 50, padding: 10 }}
-          onPress={() => {
-           dispatch(addToCart(id))
-          }}
+          onPress={onPressAddToCart}
         >
           <AddIcon size={30} />
         </TouchableOpacity>
@@ -99,9 +138,6 @@ export default function BestSeller() {
       image={item.image}
     />
   );
-
-  
-
 
   return (
     <View style={styles.container}>
