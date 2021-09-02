@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import AddIcon from "../../assets/icons/add-icon";
 import { PRODUCT } from "../api/api";
-import { SIZES, COLORS } from "../constants/theme";
+import { SIZES, COLORS, Money } from "../constants/theme";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { addToCart, deleteProduct } from "../redux/actions/action-cart";
 
@@ -18,34 +18,14 @@ interface itemProduct {
   name: string;
   price: number;
   image: any;
+  navigation?: any 
 }
 
-const ItemProduct = ({ id, name, image, price }: itemProduct) => {
-  var lengthPrice = price.toString().length;
-  var index = lengthPrice % 3;
-  let prices = "";
-  if (index == 0) {
-    for (var i = 0; i <= lengthPrice / 3; i++) {
-      prices = prices.concat(
-        price
-          .toString()
-          .slice(i * 3, lengthPrice - (lengthPrice / 3 - (i + 1)) * 3) + "."
-      );
-    }
-    prices = prices.replace("..", "");
-  } else {
-    var tem = price.toString().slice(0, index);
-    var tem2 = price.toString().slice(index, lengthPrice);
-    var lengthPrice2 = tem2.toString().length;
-    for (var i = 0; i <= lengthPrice2 / 3; i++) {
-      prices = prices.concat(
-        tem2
-          .toString()
-          .slice(i * 3, lengthPrice2 - (lengthPrice2 / 3 - (i + 1)) * 3) + "."
-      );
-    }
-    prices = tem + "." + prices.replace("..", "");
-  }
+
+
+const ItemProduct = ({ id, name, image, price , navigation}: itemProduct) => {
+ let prices  = Money(price);
+
   const dispatch = useDispatch();
   const cartCurrent = useSelector(
     (state: RootStateOrAny) => state.productReducer.cart
@@ -93,7 +73,11 @@ const ItemProduct = ({ id, name, image, price }: itemProduct) => {
   return (
     <View style={styles.containerItemProduct}>
       <View style={styles.backgroundItemProduct}></View>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={()=>{
+          navigation.navigate("DetailProduct")
+        }}
+      >
         <Image style={styles.imageItemProduct} source={image} />
       </TouchableOpacity>
       <View
@@ -104,7 +88,11 @@ const ItemProduct = ({ id, name, image, price }: itemProduct) => {
           alignItems: "center",
         }}
       >
-        <TouchableOpacity style={{ width: 100, paddingStart: 10 }}>
+        <TouchableOpacity style={{ width: 100, paddingStart: 10 }}
+          onPress={()=>{
+            navigation.navigate("DetailProduct")
+          }}
+        >
           <Text style={{ fontSize: SIZES.body3, fontWeight: "bold" }}>
             {name}
           </Text>
@@ -129,13 +117,14 @@ const ItemProduct = ({ id, name, image, price }: itemProduct) => {
   );
 };
 
-export default function BestSeller() {
+export default function BestSeller({navigation}: any ) {
   const renderItem = ({ item }: any) => (
     <ItemProduct
       id={item.id}
       name={item.name}
       price={item.price}
       image={item.image}
+      navigation={navigation}
     />
   );
 

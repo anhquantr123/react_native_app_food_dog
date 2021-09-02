@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import HeaderAppBar from "../../components/HeaderAppBar";
-import { COLORS, SIZES } from "../../constants/theme";
+import { COLORS, Money, SIZES } from "../../constants/theme";
 
 interface cartScreen {
   id?: string | any;
@@ -14,11 +14,36 @@ interface cartScreen {
 }
 
 const ProductItem = (props: cartScreen) => {
+  let prices = Money(props.price);
   return (
     <View style={styles.product_item_container}>
-      <View style={{flexDirection:'row'}}>
+      <View style={{ flexDirection: "row" }}>
         <Image source={props.image} style={styles.image_product} />
-        <Text>So Luong {props.quantity}</Text>
+        <View style={{ marginHorizontal: 5, marginVertical: 10 }}>
+          <Text style={{ fontSize: SIZES.body3, fontWeight: "bold" }}>
+            {props.name}{" "}
+          </Text>
+          <Text
+            style={{
+              fontSize: SIZES.body3,
+              fontWeight: "bold",
+              color: COLORS.primaryColor,
+              marginVertical: 5,
+            }}
+          >
+            {prices}đ
+          </Text>
+
+          <Text
+            style={{
+              fontSize: SIZES.body4,
+              color: '#000',
+              
+            }}
+          >
+            Số Lượng: {props.quantity}
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -63,6 +88,8 @@ export default function CartScreen({ navigation }: any) {
               keyExtractor={(item) => item.id}
             />
           </View>
+
+          <View></View>
         </View>
       )}
     </SafeAreaView>

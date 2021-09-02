@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native'
 export default function DetailProductScreen() {
     return (
         <View>
-            <Text></Text>
+            <Text>this is detail screen </Text>
         </View>
     )
 }

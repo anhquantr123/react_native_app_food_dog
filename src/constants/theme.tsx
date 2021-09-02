@@ -27,3 +27,34 @@ export const SIZES={
     width, 
     height
 }
+
+export const Money = (price: number) => {
+    var lengthPrice = price.toString().length;
+    var index = lengthPrice % 3;
+    let prices = "";
+    if (index == 0) {
+      for (var i = 0; i <= lengthPrice / 3; i++) {
+        prices = prices.concat(
+          price
+            .toString()
+            .slice(i * 3, lengthPrice - (lengthPrice / 3 - (i + 1)) * 3) + "."
+        );
+      }
+      prices = prices.replace("..", "");
+    } else {
+      var tem = price.toString().slice(0, index);
+      var tem2 = price.toString().slice(index, lengthPrice);
+      var lengthPrice2 = tem2.toString().length;
+      for (var i = 0; i <= lengthPrice2 / 3; i++) {
+        prices = prices.concat(
+          tem2
+            .toString()
+            .slice(i * 3, lengthPrice2 - (lengthPrice2 / 3 - (i + 1)) * 3) + "."
+        );
+      }
+      prices = tem + "." + prices.replace("..", "");
+  
+      
+    }
+    return prices;
+  };

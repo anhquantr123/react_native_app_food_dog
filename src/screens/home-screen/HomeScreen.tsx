@@ -10,7 +10,7 @@ export default function HomeScreen({navigation}: any) {
         <ScrollView  style={styles.container} scrollEnabled >
             <HeaderAppBar showBackIcon={false} navigation={navigation}/>
             <Category/>
-            <BestSeller />
+            <BestSeller navigation={navigation}/>
         </ScrollView>
     )
 }
