@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, StyleSheet, Text, View , Image} from "react-native";
+import { SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import HeaderAppBar from "../../components/HeaderAppBar";
@@ -16,9 +16,10 @@ interface cartScreen {
 const ProductItem = (props: cartScreen) => {
   return (
     <View style={styles.product_item_container}>
+      <View style={{flexDirection:'row'}}>
         <Image source={props.image} style={styles.image_product} />
         <Text>So Luong {props.quantity}</Text>
-
+      </View>
     </View>
   );
 };
@@ -82,7 +83,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   product_item_container: {
-    
     height: 100,
     backgroundColor: COLORS.backgroundColor,
     shadowColor: "#000",
@@ -94,11 +94,11 @@ const styles = StyleSheet.create({
     shadowRadius: 2.22,
     elevation: 3,
     borderRadius: 15,
-   margin: 10
+    margin: 10,
   },
-  image_product:{
-      height: 80, 
-      width: 80,
-      margin: 5
-  }
+  image_product: {
+    height: 80,
+    width: 80,
+    margin: 5,
+  },
 });
