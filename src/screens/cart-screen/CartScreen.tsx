@@ -157,15 +157,19 @@ export default function CartScreen({ navigation }: any) {
       ) : (
         <View>
           <Text style={styles.text_total_product}>{itemCart} items</Text>
-          <View>
+          <View style={{height:'75%'}}>
             <FlatList
               data={CART_DATA}
               renderItem={renderItem}
               keyExtractor={(item) => item.id}
+              showsVerticalScrollIndicator={false}
+              
             />
           </View>
 
-          <View></View>
+          <View style={styles.card_total_price}>
+            <Text>{CART_DATA.length} items </Text>
+          </View>
         </View>
       )}
     </SafeAreaView>
@@ -204,4 +208,17 @@ const styles = StyleSheet.create({
     width: 80,
     margin: 5,
   },
+  card_total_price:{
+    backgroundColor: '#fff',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3,
+    borderRadius: 15,
+    padding: 10
+  }
 });
