@@ -75,7 +75,7 @@ const ItemProduct = ({ id, name, image, price , navigation}: itemProduct) => {
       <View style={styles.backgroundItemProduct}></View>
       <TouchableOpacity
         onPress={()=>{
-          navigation.navigate("DetailProduct")
+          navigation.navigate("DetailProduct", {id, image, name , price, })
         }}
       >
         <Image style={styles.imageItemProduct} source={image} />

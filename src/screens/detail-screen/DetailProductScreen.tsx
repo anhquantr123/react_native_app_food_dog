@@ -1,12 +1,23 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import HeaderAppBar from '../../components/HeaderAppBar'
+import { COLORS } from '../../constants/theme'
 
-export default function DetailProductScreen() {
+
+
+export default function DetailProductScreen({navigation}: any ) {
     return (
-        <View>
-            <Text>this is detail screens </Text>
-        </View>
+        <SafeAreaView style={styles.container}>
+            <HeaderAppBar showBackIcon={true} showInput={false} title="hello" navigation={navigation}/>
+        </SafeAreaView>
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: COLORS.backgroundColor,
+        paddingHorizontal: 10,
+        paddingTop: 10,
+      },
+})

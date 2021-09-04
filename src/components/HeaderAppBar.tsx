@@ -19,6 +19,7 @@ interface headerAppBar {
   placeholder?: string | any;
   showInput?: boolean,
   showCart?: boolean,
+  title?: string | any ,
 }
 
 export default function HeaderAppBar({
@@ -27,6 +28,7 @@ export default function HeaderAppBar({
   placeholder = "Tìm kiếm...",
   showInput = true,
   showCart = true,
+  title,
 }: headerAppBar) {
   const [widthContainerSearch, setWidthContainerSearch] = useState("87%");
   const cart = useSelector(
@@ -62,7 +64,9 @@ export default function HeaderAppBar({
       >
         <SearchIcon size={24} />
         <TextInput style={styles.inputSearch} placeholder={placeholder} />
-      </View>: null }
+      </View>:  <View>
+        <Text>{title}</Text>
+        </View> }
 
      {showCart == true ?  <TouchableOpacity style={styles.cart}
         onPress={()=>{
