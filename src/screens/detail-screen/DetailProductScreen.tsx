@@ -5,10 +5,10 @@ import { COLORS } from '../../constants/theme'
 
 
 
-export default function DetailProductScreen({navigation}: any ) {
+export default function DetailProductScreen({navigation, route}: any ) {
     return (
         <SafeAreaView style={styles.container}>
-            <HeaderAppBar showBackIcon={true} showInput={false} title="hello" navigation={navigation}/>
+            <HeaderAppBar showBackIcon={true} showInput={false} title={route.params.name} navigation={navigation}/>
         </SafeAreaView>
     )
 }

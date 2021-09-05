@@ -65,7 +65,7 @@ export default function HeaderAppBar({
         <SearchIcon size={24} />
         <TextInput style={styles.inputSearch} placeholder={placeholder} />
       </View>:  <View>
-        <Text>{title}</Text>
+        <Text style={{fontWeight:'bold', fontSize:SIZES.body2}}>{title}</Text>
         </View> }
 
      {showCart == true ?  <TouchableOpacity style={styles.cart}

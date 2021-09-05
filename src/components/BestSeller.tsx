@@ -90,7 +90,7 @@ const ItemProduct = ({ id, name, image, price , navigation}: itemProduct) => {
       >
         <TouchableOpacity style={{ width: 100, paddingStart: 10 }}
           onPress={()=>{
-            navigation.navigate("DetailProduct")
+            navigation.navigate("DetailProduct" , {id, image, name , price, })
           }}
         >
           <Text style={{ fontSize: SIZES.body3, fontWeight: "bold" }}>
