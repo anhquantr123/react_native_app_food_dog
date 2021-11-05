@@ -12,19 +12,18 @@ import { PRODUCT } from "../api/api";
 import { SIZES, COLORS, Money } from "../constants/theme";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { addToCart, deleteProduct } from "../redux/actions/action-cart";
+import SectionTitle from "./SectionTitle";
 
 interface itemProduct {
   id: string | any;
   name: string;
   price: number;
   image: any;
-  navigation?: any 
+  navigation?: any;
 }
 
-
-
-const ItemProduct = ({ id, name, image, price , navigation}: itemProduct) => {
- let prices  = Money(price);
+const ItemProduct = ({ id, name, image, price, navigation }: itemProduct) => {
+  let prices = Money(price);
 
   const dispatch = useDispatch();
   const cartCurrent = useSelector(
@@ -74,8 +73,8 @@ const ItemProduct = ({ id, name, image, price , navigation}: itemProduct) => {
     <View style={styles.containerItemProduct}>
       <View style={styles.backgroundItemProduct}></View>
       <TouchableOpacity
-        onPress={()=>{
-          navigation.navigate("DetailProduct", {id, image, name , price, })
+        onPress={() => {
+          navigation.navigate("DetailProduct", { id, image, name, price });
         }}
       >
         <Image style={styles.imageItemProduct} source={image} />
@@ -88,9 +87,10 @@ const ItemProduct = ({ id, name, image, price , navigation}: itemProduct) => {
           alignItems: "center",
         }}
       >
-        <TouchableOpacity style={{ width: 100, paddingStart: 10 }}
-          onPress={()=>{
-            navigation.navigate("DetailProduct" , {id, image, name , price, })
+        <TouchableOpacity
+          style={{ width: 100, paddingStart: 10 }}
+          onPress={() => {
+            navigation.navigate("DetailProduct", { id, image, name, price });
           }}
         >
           <Text style={{ fontSize: SIZES.body3, fontWeight: "bold" }}>
@@ -117,7 +117,7 @@ const ItemProduct = ({ id, name, image, price , navigation}: itemProduct) => {
   );
 };
 
-export default function BestSeller({navigation}: any ) {
+export default function BestSeller({ navigation }: any) {
   const renderItem = ({ item }: any) => (
     <ItemProduct
       id={item.id}
@@ -130,14 +130,7 @@ export default function BestSeller({navigation}: any ) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.flatRow}>
-        <Text style={{ fontSize: SIZES.h4, fontWeight: "bold" }}>
-          Best Seller
-        </Text>
-        <TouchableOpacity>
-          <Text style={{ color: COLORS.primaryColor }}>See all </Text>
-        </TouchableOpacity>
-      </View>
+      <SectionTitle title={"Best Seller"} />
       <FlatList
         showsHorizontalScrollIndicator={false}
         horizontal
